@@ -1,6 +1,6 @@
 // const sgmail=require('sendgrid/mail');
 const sgmail =require ("@sendgrid/mail");
-sgmail.setApiKey('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');
+sgmail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const sendMail=(email,name)=>{
     sgmail.send({
