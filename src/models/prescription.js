@@ -3,15 +3,10 @@ const jwt = require("jsonwebtoken");
 
 const prescriptionSchema = new mongoose.Schema(
   {
-    doctorId: {
+    appointmentId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "Doctor",
-    },
-    PatientId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "Patient",
+      ref: "Appointment",
     },
     tabletName: {
       type: String,

@@ -3,6 +3,7 @@ require('./db/mongoose');
 
 const loginRoute=require('./routers/login');
 const patientSignUp=require('./routers/patient_signup');
+const test=require('./routers/test');
 // const patientLogout=require('./routes/patient_logout');
 // const patientPrescription=require('./routes/patient_prescription');
 // const patientUpdateProfile=require('./routes/patient_update_profile');
@@ -15,6 +16,7 @@ const port=process.env.PORT||3000;
 app.use(express.json());
 app.use(loginRoute);
 app.use(patientSignUp);
+app.use(test);
 // app.use(patientPrescription);
 // app.use(patientUpdateProfile);
 // app.use(patientAppointment);

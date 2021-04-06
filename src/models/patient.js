@@ -22,16 +22,16 @@ const patientSchema = new mongoose.Schema(
         }
       },
     },
-    contact_number: {
-      type: Number,
-      unique: true,
-      trim: true,
-      validate(value) {
-        if (!validator.isInt(value)) {
-          throw new Error("invalid phone number");
-        }
-      },
-    },
+    // contact_number: {
+    //   type: Number,
+    //   unique: true,
+    //   trim: true,
+    //   validate(value) {
+    //     if (!validator.isInt(value)) {
+    //       throw new Error("invalid phone number");
+    //     }
+    //   },
+    // },
     dob: {
       type: Date,
       trim: true,

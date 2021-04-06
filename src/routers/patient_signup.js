@@ -6,8 +6,8 @@ const {sendMail}=require('../emails/account');
 router.post("/patient/patient_signup", async (req, res) => {
   const patient = new Patient(req.body);
   try {
-    await patient.save();;
-    sendMail(patient.email,patient.name);
+    await patient.save();
+    // sendMail(patient.email,patient.name);
     const token = await patient.getPatientAuthToken();
     res.status(201).send({ patient,token });
   } catch (e) {
