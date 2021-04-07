@@ -2,7 +2,7 @@ const express = require('express')
 require('../controllers/db_controller')
 
 const loginRoute=require('./routers/login');
-const doc_sign_up_router = require('./routers/sign_up.js')
+const doc_sign_up_router = require('./routers/doctor_signup.js')
 const add_clinic = require('./routers/add-clinic.js')
 
 const patientSignUp=require('./routers/patient_signup');
@@ -11,10 +11,14 @@ const patientSignUp=require('./routers/patient_signup');
 // const patientUpdateProfile=require('./routes/patient_update_profile');
 // const patientAppointment=require('./routes/patient_appointments');
 
+const test=require('./routers/test');
+
 const app = express()
 const port = process.env.PORT
 
 app.use(express.json())
+
+app.use(test);
 app.use(doc_sign_up_router)
 app.use(add_clinic)
 

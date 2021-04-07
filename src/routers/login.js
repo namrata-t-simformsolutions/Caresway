@@ -3,7 +3,6 @@ const router = express.Router();
 const Patient = require("../models/patient");
 // const Doctor = require("../models/doctor");
 
-
 router.post("/login", async (req, res) => {
   try {
     const patient = await Patient.findByCredentails(
