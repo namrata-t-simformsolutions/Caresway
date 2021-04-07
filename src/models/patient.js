@@ -5,11 +5,6 @@ const jwt = require("jsonwebtoken");
 
 const patientSchema = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
     email: {
       type: String,
       unique: true,
@@ -69,17 +64,6 @@ const patientSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
-    password: {
-      type: String,
-      required: true,
-      trim: true,
-      minlength: 7,
-      validate(value) {
-        if (value.toLowerCase().includes("password")) {
-          throw new Error("cannot contain 'password'...");
-        }
-      },
-    },
     tokens: [
       {
         token: {
@@ -106,16 +90,6 @@ const patientSchema = new mongoose.Schema(
 //   foreignField:'PatientId'
 // })
 
-
-//hashing password
-// patientSchema.pre("save", async function (next) {
-//   const patient = this;
-//   if (patient.isModified("password")) {
-//     patient.password = await bcrypt.hash(patient.password, 8);
-//   }
-//   next();
-// });
-
 // patientSchema.methods.toJSON= function(){
 //   const patient=this;
 //   const patientObject=patient.toObject();
@@ -127,27 +101,14 @@ const patientSchema = new mongoose.Schema(
 
 patientSchema.methods.getPatientAuthToken = async function () {
   const patient = this;
-  const token = jwt.sign({ _id: patient._id.toString() }, process.env.JWT_SECRET);
-  patient.tokens=patient.tokens.concat({token});
+  const token = jwt.sign(
+    { _id: patient._id.toString() },
+    process.env.JWT_SECRET
+  );
+  patient.tokens = patient.tokens.concat({ token });
   await patient.save();
-  return token; 
+  return token;
 };
-
-patientSchema.statics.findByCredentails = async (email, password) => {
-  const patient = await Patient.findOne({ email });
-
-  if (!patient) {
-    throw new Error("unable to login");
-  }
-  const isMatch = await bcrypt.compare(password, patient.password);
-
-  if (!isMatch) {
-    throw new Error("unable to login");
-  }
-
-  return patient;
-};
-
 
 const Patient = mongoose.model("Patient", patientSchema);
 

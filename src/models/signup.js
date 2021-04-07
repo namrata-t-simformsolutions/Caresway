@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require('bcrypt');
 
 const signupSchema = new mongoose.Schema({
   name: {
@@ -34,3 +35,30 @@ const signupSchema = new mongoose.Schema({
     type: Boolean
   },
 });
+
+signupSchema.statics.findByCredentails = async (email, password) => {
+  const user = await Signup.findOne({ email });
+
+  if (!user) {
+    throw new Error("unable to login");
+  }
+  const isMatch = await bcrypt.compare(password, user.password);
+
+  if (!isMatch) {
+    throw new Error("unable to login");
+  }
+
+  return user;
+};
+
+// hashing password
+signupSchema.pre("save", async function (next) {
+  const user = this;
+  if (user.isModified("password")) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();
+});
+
+const Signup=mongoose.model('Signup',signupSchema);
+module.exports=Signup;
