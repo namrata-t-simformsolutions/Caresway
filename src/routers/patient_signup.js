@@ -1,15 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const Patient = require("../models/patient");
+const Signup = require("../models/signup");
 const {sendMail}=require('../emails/account');
+const Patient = require("../models/patient");
 
-router.post("/patient/patient_signup", async (req, res) => {
-  const patient = new Patient(req.body);
+router.post("/patient/signup", async (req, res) => {
+  const patientSignup = new Signup(req.body);
+  const patient=new Patient({email:req.body.email});
+  patientSignup.isDoc=false;
   try {
+    await patientSignup.save();
     await patient.save();
-    // sendMail(patient.email,patient.name);
-    const token = await patient.getPatientAuthToken();
-    res.status(201).send({ patient,token });
+    // sendMail(patientSignup.email,patientSignup.name);
+    res.status(201).send({ patientSignup });
   } catch (e) {
     res.status(400).send(e);
   }
