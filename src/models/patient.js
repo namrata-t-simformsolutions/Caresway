@@ -17,16 +17,16 @@ const patientSchema = new mongoose.Schema(
         }
       },
     },
-    // contact_number: {
-    //   type: Number,
-    //   unique: true,
-    //   trim: true,
-    //   validate(value) {
-    //     if (!validator.isInt(value)) {
-    //       throw new Error("invalid phone number");
-    //     }
-    //   },
-    // },
+    contact_number: {
+      type: Number,
+      unique: true,
+      trim: true,
+      validate(value) {
+        if (!validator.isInt(value)) {
+          throw new Error("invalid phone number");
+        }
+      },
+    },
     dob: {
       type: Date,
       trim: true,
@@ -72,6 +72,53 @@ const patientSchema = new mongoose.Schema(
         },
       },
     ],
+    allergies: [],
+    other_illness: [
+      {
+        illness_name: {
+          type: String,
+        },
+        medication: [
+          {
+            name: {
+              type: String,
+            },
+            doses: {
+              type: String,
+            },
+            prescribedBy: {
+              type: String,
+            },
+          },
+        ],
+      },
+    ],
+    unhealthy_habits: {
+      type: Boolean,
+    },
+    current_medication: {
+      type: Boolean,
+    },
+    operations_surgeries: [
+      {
+        operation_surgery_name: {
+          type: String,
+        },
+        date: {
+          type: Date,
+        },
+      },
+    ],
+    family_history:[
+      {
+        relation:{
+          type:String,
+        },
+        illness:{
+          type:String
+        }
+      }
+    ]
   },
   {
     timestamps: true,
