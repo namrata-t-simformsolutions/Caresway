@@ -1,6 +1,8 @@
 const router = require('express').Router();
+const auth = require('../middlewares/doctorAuth')
+const auth1 = require('../middlewares/patientAuth')
 
-router.get('/patient/logout',auth,(req,res)=>{
+router.post('/patient/logout',auth1, async(req,res)=>{
     try {
         req.patient.tokens = req.patient.tokens.filter((token) => {
           return token.token !== req.token;
@@ -13,7 +15,7 @@ router.get('/patient/logout',auth,(req,res)=>{
       }
 })
 
-router.get('/doctor/logout',auth,(req,res)=>{
+router.post('/doctor/logout',auth, async(req,res)=>{
     try {
         req.doctor.tokens = req.doctor.tokens.filter((token) => {
           return token.token !== req.token;

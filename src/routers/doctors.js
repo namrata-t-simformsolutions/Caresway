@@ -1,17 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Doctor = require("../models/doctor");
+const Clinic = require('../models/clinic');
+const auth = require('../middlewares/doctorAuth')
+const auth1 = require('../middlewares/patientAuth')
 
-router.get("/doctors", async (req, res) => {
-  const match = {};
-  if (req.query.location) {
-    match.location = req.query.location;
-  }
-  if (req.query.speciality) {
-    match.speciality = req.query.speciality;
-  }
-  Doctor.find({...match},(error,obj)=>{
-    if(error) res.send(error);
-    else res.send(obj);
+
+router.get('/doctors/:clinic_address.city',  auth1, auth, async(req,res)=> {
+  const city = req.params.clinic_address.city
+
+  Clinic.findById(city).then((clinic)=> {
+      if(!clinic) {
+          return res.status(400).send()
+      }
+
+      res.send(clinic)
   })
-});
+})

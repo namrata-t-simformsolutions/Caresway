@@ -7,11 +7,14 @@ const clinicSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    clinic_address: {
-        type: String,
+    clinic_address: [{
+        area: String,
+        city: String,
+        state: String,
+        country: String,
         required: true,
         trim: true,
-    },
+    }],
     
     clinic_timing: {
         type: String,

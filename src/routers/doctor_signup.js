@@ -6,7 +6,9 @@ const Signup = require('../models/signup')
 
 router.post('/doctor/signup', async (req,res) =>{
     const doctorSignup = new Signup(req.body)
-    const doctor=new Doctor({email:req.body.email,doctor_speciality:req.body.doctor_speciality});
+    const doctor=new Doctor({
+        email:req.body.email,doctor_speciality:req.body.doctor_speciality
+    });
     doctorSignup.isDoc=true;
     try{
         await doctorSignup.save();
@@ -18,4 +20,6 @@ router.post('/doctor/signup', async (req,res) =>{
         console.log(e)
     }
 })
+
+
 module.exports = router
