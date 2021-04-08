@@ -18,7 +18,10 @@ const clinicSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    }
 })
 
 
