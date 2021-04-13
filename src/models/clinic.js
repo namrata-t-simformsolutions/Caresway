@@ -8,12 +8,20 @@ const clinicSchema = new mongoose.Schema({
         required: true
     },
     clinic_address: [{
-        area: String,
-        city: String,
-        state: String,
-        country: String,
-        required: true,
-        trim: true,
+       
+        area:{
+            type: String
+        },
+        city:{
+            type: String 
+        },
+        state:{
+            type: String
+        }, 
+        country:{
+            type: String
+        },
+        
     }],
     
     clinic_timing: {
@@ -23,7 +31,8 @@ const clinicSchema = new mongoose.Schema({
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
+        ref: 'doctor'
     }
 })
 

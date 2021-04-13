@@ -19,6 +19,7 @@
   "homepage": "https://github.com/namrata-t-simformsolutions/Caresway#readme",
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
+    "async": "^3.2.0",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "env-cmd": "^10.1.0",

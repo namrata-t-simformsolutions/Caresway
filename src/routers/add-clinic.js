@@ -10,7 +10,7 @@ router.post('/clinic', auth, async (req,res) =>{
     })
     try{
         await clinic.save()
-        res.status(201).send('success!!')
+        res.status(201).send(clinic)
     }
     catch(e){
         console.log(e)
