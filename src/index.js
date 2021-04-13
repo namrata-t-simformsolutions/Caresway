@@ -11,7 +11,8 @@ const patientSignUp=require('./routers/patient_signup');
 const patientLogout=require('./routers/patient_logout');
 // const patientPrescription=require('./routes/patient_prescription');
 const patientUpdateProfile=require('./routers/patient_update_profile');
-// const patientAppointment=require('./routes/patient_appointments');
+const patientAppointment=require('./routers/patient_appointments');
+const patientBookAppointment=require('./routers/patient_book_appointment');
 
 const test=require('./routers/test');
 
@@ -30,7 +31,8 @@ app.use(loginRoute);
 app.use(patientSignUp);
 // app.use(patientPrescription);
 app.use(patientUpdateProfile);
-// app.use(patientAppointment);
+app.use(patientBookAppointment);
+app.use(patientAppointment);
 app.use(patientLogout);
 
 
