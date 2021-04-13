@@ -45,10 +45,17 @@ const doctorSchema = new mongoose.Schema({
     },
   ],
 });
+
 doctorSchema.virtual('clinic', {
   ref: 'clinic',
   localField: '_id',
   foreignField: 'owner'
+})
+
+doctorSchema.virtual('appointments',{
+  ref:'Appointment',
+  localField: '_id',
+  foreignField:'doctorId'
 })
 
 doctorSchema.methods.getDoctorAuthToken = async function () {

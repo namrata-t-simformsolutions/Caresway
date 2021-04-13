@@ -1,7 +1,9 @@
 const Patient = require("../models/patient");
+const SignUp=require("../models/signup");
+const Doctor=require("../models/doctor");
 const router = require('express').Router();
 
-router.get('/',(req,res)=>{
+router.get('/',async(req,res)=>{
     const match = {};
   if (req.query.gender) {
     match.gender = req.query.gender;
@@ -9,10 +11,24 @@ router.get('/',(req,res)=>{
   if (req.query.blood_group) {
     match.blood_group = req.query.blood_group;
   }
-  
-    Patient.find({...match},(error,obj)=>{
-        if(error) res.send(error);
-        else res.send(obj);
+  var arr=[];
+  await SignUp.find({isDoc:true}, (error,obj)=>{
+       if(error) res.send(error);
+        else{
+          obj.forEach((doc)=>{
+            Doctor.find({email:doc.email}).then((val)=>{
+
+              // arr=arr.concat(val[0]);
+              // arr.push(val[0]);
+              console.log(val[0].email);
+            }).catch((e)=>{
+              console.log(e);
+            })
+          })
+          console.log(arr);
+          res.send(arr);
+        }
+        
     })
 })
 

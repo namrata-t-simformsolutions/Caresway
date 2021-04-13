@@ -125,11 +125,11 @@ const patientSchema = new mongoose.Schema(
   }
 );
 
-// patientSchema.virtual('appointments',{
-//   ref:'Appointment',
-//   localfield:'_id',
-//   foreignField:'PatientId'
-// })
+patientSchema.virtual('appointments',{
+  ref:'Appointment',
+  localField: '_id',
+  foreignField:'patientId'
+})
 
 // patientSchema.virtual('prescriptions',{
 //   ref:'Prescription',

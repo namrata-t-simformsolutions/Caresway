@@ -14,6 +14,7 @@ router.post("/patient/signup", async (req, res) => {
     // sendMail(patientSignup.email,patientSignup.name);
     res.status(201).send({ patientSignup });
   } catch (e) {
+    console.log(e);
     res.status(400).send(e);
   }
 });
