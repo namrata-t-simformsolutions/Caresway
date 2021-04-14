@@ -7,6 +7,8 @@ const Appointment = require("../models/appointment");
 
 router.get("/doctor/appointments", doctorAuth, async (req, res) => {
   const match = { doctorId: req.doctor._id };
+  console.log(req.doctor._id);
+
   try {
     await req.doctor.populate({
         path: "appointments",
@@ -19,9 +21,9 @@ router.get("/doctor/appointments", doctorAuth, async (req, res) => {
     //     return patient[0];
     //   }))
       
-    // console.log(req.patient.appointments);
+    // console.log(req.doctor.appointments);
     res.send(
-        req.patient.appointments
+        req.doctor.appointments
     );
   } catch (e) {
     res.status(500).send(e);

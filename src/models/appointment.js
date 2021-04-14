@@ -13,15 +13,18 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
       ref: "Patient",
     },
-    date:{
-        type:Date,
+    date: {
+      type: Date,
     },
-    time:{
-        type:String,
+    time: {
+      type: String,
     },
-    status:{
-        type:String,
-    }
+    status: {
+      type: String,
+    },
+    completed: {
+      type: Boolean,
+    },
   },
   {
     timestamps: true,
