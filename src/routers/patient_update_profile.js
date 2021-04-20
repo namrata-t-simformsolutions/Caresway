@@ -22,6 +22,8 @@ router.patch("/patient/profile", patientAuth, async (req, res) => {
     "blood_group",
     "allergies",
     "other_illness",
+    "operations_surgeries",
+    "family_history"
   ];
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)

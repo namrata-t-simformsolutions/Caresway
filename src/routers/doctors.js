@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Doctor = require("../models/doctor");
 const Clinic = require("../models/clinic");
+const SignUp=require("../models/signup");
 const auth = require("../middlewares/doctorAuth");
-const e = require("express");
+const Signup = require("../models/signup");
 
 router.get("/doctors", async (req, res) => {
   const city = req.query.city;
@@ -13,7 +14,15 @@ router.get("/doctors", async (req, res) => {
     if (clinic) {
       const result=await Promise.all(clinic.map(async (val)=>{
         const doctor= await Doctor.find({"_id":val.owner , "doctor_speciality": speciality});
-        return doctor[0];
+        const user=await Signup.find({email:doctor[0].email});
+        const temp={
+          "id":doctor[0]._id,
+          "name":user[0].name,
+          "email":doctor[0].email,
+          "speciality":doctor[0].doctor_speciality,
+          "location":city
+        }
+        return temp;
       }))
       if(result.length!=0){
         res.send(result);
