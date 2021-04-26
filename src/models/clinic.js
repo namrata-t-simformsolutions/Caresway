@@ -37,6 +37,17 @@ const clinicSchema = new mongoose.Schema({
     
 })
 
+clinicSchema.methods.toJSON= function(){
+    const clinic=this;
+    const clinicObject=clinic.toObject();
+    const clinicAddressObject=clinicObject.clinic_address[0];
+    delete clinicObject._id;
+    delete clinicObject.__v;
+    delete clinicObject.owner;
+    delete clinicAddressObject._id;
+    return clinicObject;
+  }
+  
 
 
 const Clinic = mongoose.model('clinic', clinicSchema)

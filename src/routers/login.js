@@ -10,15 +10,28 @@ router.post("/login", async (req, res) => {
       req.body.email,
       req.body.password
     );
+    console.log(req.body.email);
+    console.log(req.body.password);
+    const flag={
+      'isDoc':user.isDoc
+    }
     if (user.isDoc) {
       await Doctor.find({ email: user.email }).then(async (doctor) => {
         const token = await doctor[0].getDoctorAuthToken();
-        res.send({ doctor, token });
+        const temp={
+          "isDoc":user.isDoc,
+          "doctor_name":user.name,
+          "doctor_email":doctor[0].email,
+          "doctor_speciality":doctor[0].doctor_speciality,
+          "doctor_id":doctor[0]._id,
+          token
+        }
+        res.send(temp);
       });
     } else {
       await Patient.find({ email: user.email }).then(async (patient) => {
         const token = await patient[0].getPatientAuthToken();
-        res.send({ patient, token });
+        res.send({flag, patient, token });
       });
     }
   } catch (e) {

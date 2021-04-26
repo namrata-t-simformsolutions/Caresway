@@ -1,4 +1,6 @@
 const express = require('express')
+const cors = require('cors')
+
 require('../controllers/db_controller')
 
 const loginRoute=require('./routers/login');
@@ -21,6 +23,13 @@ const test=require('./routers/test');
 
 const app = express()
 const port = process.env.PORT
+
+
+const corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions))
 
 app.use(express.json())
 
