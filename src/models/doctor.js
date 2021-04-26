@@ -57,6 +57,15 @@ doctorSchema.virtual('appointments',{
   localField: '_id',
   foreignField:'doctorId'
 })
+doctorSchema.methods.toJSON= function(){
+  const doctor=this;
+  const doctorObject=doctor.toObject();
+
+  delete doctorObject.tokens;
+  delete doctorObject.password;
+  delete doctorObject.__v;
+  return doctorObject;
+}
 
 doctorSchema.methods.getDoctorAuthToken = async function () {
   const doctor = this;

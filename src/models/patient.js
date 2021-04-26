@@ -133,18 +133,20 @@ patientSchema.virtual('appointments',{
 
 // patientSchema.virtual('prescriptions',{
 //   ref:'Prescription',
-//   localfield:'_id',
-//   foreignField:'PatientId'
+//   localField: '_id',
+//   foreignField:'patientId'
 // })
 
-// patientSchema.methods.toJSON= function(){
-//   const patient=this;
-//   const patientObject=patient.toObject();
+patientSchema.methods.toJSON= function(){
+  const patient=this;
+  const patientObject=patient.toObject();
 
-//   delete patientObject.tokens;
-//   delete patientObject.password;
-//   return patientObject;
-// }
+  delete patientObject.tokens;
+  delete patientObject.password;
+  delete patientObject.createdAt;
+  delete patientObject.updatedAt;
+  return patientObject;
+}
 
 patientSchema.methods.getPatientAuthToken = async function () {
   const patient = this;

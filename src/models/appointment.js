@@ -19,9 +19,6 @@ const appointmentSchema = new mongoose.Schema(
     time: {
       type: String,
     },
-    status: {
-      type: String,
-    },
     completed: {
       type: Boolean,
     },

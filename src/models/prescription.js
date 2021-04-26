@@ -21,10 +21,23 @@ const prescriptionSchema = new mongoose.Schema(
       type: Number,
     },
   },
+  
   {
     timestamps: true,
   }
 );
+
+prescriptionSchema.methods.toJSON= function(){
+  const prescription=this;
+  const prescriptionObject=prescription.toObject();
+
+  delete prescriptionObject.tokens;
+  delete prescriptionObject.password;
+  delete prescriptionObject.createdAt;
+  delete prescriptionObject.updatedAt;
+  delete prescriptionObject.__v;
+  return prescriptionObject;
+}
 
 const Prescription = mongoose.model("Prescription", prescriptionSchema);
 

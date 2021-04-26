@@ -8,10 +8,11 @@ const doctorAppointment=require('./routers/doctor_appointments');
 const doctorAddPrescription=require('./routers/doctor_add_prescription');
 const doctorLogout = require('./routers/doctor_logout')
 const doctor = require('./routers/doctors')
+const doctorUpdateProfile=require('./routers/doctor_update_profile');
+const updateClinic=require('./routers/update_clinic');
 
 const patientSignUp=require('./routers/patient_signup');
 const patientLogout=require('./routers/patient_logout');
-// const patientPrescription=require('./routes/patient_prescription');
 const patientUpdateProfile=require('./routers/patient_update_profile');
 const patientAppointment=require('./routers/patient_appointments');
 const patientBookAppointment=require('./routers/patient_book_appointment');
@@ -30,11 +31,12 @@ app.use(doctorLogout);
 app.use(doctor)
 app.use(doctorAppointment);
 app.use(doctorAddPrescription);
+app.use(updateClinic)
 
 app.use(loginRoute);
 app.use(patientSignUp);
-// app.use(patientPrescription);
 app.use(patientUpdateProfile);
+app.use(doctorUpdateProfile);
 app.use(patientBookAppointment);
 app.use(patientAppointment);
 app.use(patientLogout);
