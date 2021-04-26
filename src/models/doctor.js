@@ -69,6 +69,16 @@ doctorSchema.methods.getDoctorAuthToken = async function () {
   return token;
 };
 
+doctorSchema.methods.toJSON= function(){
+  const doctor=this;
+  const doctorObject=doctor.toObject();
+
+  delete doctorObject.tokens;
+  delete doctorObject.password;
+  delete doctorObject.__v;
+  return doctorObject;
+}
+
 const Doctor = mongoose.model("doctor", doctorSchema);
 
 module.exports = Doctor;

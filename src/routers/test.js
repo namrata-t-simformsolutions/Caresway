@@ -1,6 +1,7 @@
 const Patient = require("../models/patient");
 const SignUp=require("../models/signup");
 const Doctor=require("../models/doctor");
+const Clinic = require("../models/clinic");
 const router = require('express').Router();
 
 // router.get('/',async(req,res)=>{
@@ -32,12 +33,20 @@ const router = require('express').Router();
 //     })
 // })
 
-router.get('/test',(req,res)=>{
-  res.send([{
-    "name":"bob"
-  },{
-    "name":"marley"
-  }])
+// router.get('/test',(req,res)=>{
+//   res.send([{
+//     "name":"bob"
+//   },{
+//     "name":"marley"
+//   }])
+// })
+
+router.get('/test',async(req,res)=>{
+  const clinics=await Clinic.find({'clinic_address.city':'ahmedabad'});
+  clinics.forEach((clinic)=>{
+    console.log(clinic.clinic_address);
+  })
+  // console.log(clinics.address);
 })
 
 
