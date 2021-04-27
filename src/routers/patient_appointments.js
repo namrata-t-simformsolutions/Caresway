@@ -51,7 +51,7 @@ router.get("/patient/appointments", patientAuth, async (req, res) => {
         }
       })
     );
-    console.log(result);
+    //console.log(result);
     res.send(result);
     // console.log(req.patient.appointments);
     // res.send(req.patient.appointments);
