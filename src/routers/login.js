@@ -20,10 +20,9 @@ router.post("/login", async (req, res) => {
         const token = await doctor[0].getDoctorAuthToken();
         const temp={
           "isDoc":user.isDoc,
-          "doctor_name":user.name,
-          "doctor_email":doctor[0].email,
-          "doctor_speciality":doctor[0].doctor_speciality,
-          "doctor_id":doctor[0]._id,
+          "name":user.name,
+          "email":doctor[0].email,
+          "id":doctor[0]._id,
           token
         }
         res.send(temp);
@@ -31,7 +30,14 @@ router.post("/login", async (req, res) => {
     } else {
       await Patient.find({ email: user.email }).then(async (patient) => {
         const token = await patient[0].getPatientAuthToken();
-        res.send({flag, patient, token });
+        const temp={
+          "isDoc":user.isDoc,
+          "name":user.name,
+          "email":patient[0].email,
+          "id":patient[0]._id,
+          token
+        }
+        res.send(temp);
       });
     }
   } catch (e) {
