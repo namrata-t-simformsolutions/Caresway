@@ -35,6 +35,13 @@ const signupSchema = new mongoose.Schema({
     type: Boolean
   },
 });
+signupSchema.post('save', function(error, doc, next) {
+  if (error.name === 'MongoError' && error.code === 11000) {
+    next(new Error('email must be unique'));
+  } else {
+    next(error);
+  }
+});
 
 signupSchema.statics.findByCredentails = async (email, password) => {
   const user = await Signup.findOne({ email });
@@ -50,6 +57,7 @@ signupSchema.statics.findByCredentails = async (email, password) => {
 
   return user;
 };
+
 
 // hashing password
 signupSchema.pre("save", async function (next) {

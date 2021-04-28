@@ -10,8 +10,6 @@ router.post("/login", async (req, res) => {
       req.body.email,
       req.body.password
     );
-    console.log(req.body.email);
-    console.log(req.body.password);
     const flag={
       'isDoc':user.isDoc
     }

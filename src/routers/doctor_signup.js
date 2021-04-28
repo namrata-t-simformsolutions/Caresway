@@ -11,13 +11,17 @@ router.post('/doctor/signup', async (req,res) =>{
     });
     doctorSignup.isDoc=true;
     try{
+        
         await doctorSignup.save();
         await doctor.save();
+        
         // sendMail(doctorSignup.email,doctorSignup.name);
         res.status(201).send('success!!')
-    }
+   } 
     catch(e){
+        
         console.log(e)
+        res.status(500).send(e)
     }
 })
 

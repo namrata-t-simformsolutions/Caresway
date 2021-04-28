@@ -6,8 +6,7 @@ router.post('/clinic', auth, async (req,res) =>{
     //const clinic = new Clinic(req.body)
     const clinic = new Clinic({
         ...req.body,
-        owner: req.doctor._id,
-        
+        owner: req.doctor._id,   
     })
     try{
         await clinic.save()

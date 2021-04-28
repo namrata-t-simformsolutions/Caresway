@@ -13,6 +13,7 @@ const doctorSchema = new mongoose.Schema({
       if (!validator.isEmail(value)) {
         throw new Error("Email is invalid");
       }
+      
     },
   },
   contact_no: {
@@ -75,8 +76,11 @@ doctorSchema.methods.getDoctorAuthToken = async function () {
   );
   doctor.tokens = doctor.tokens.concat({ token });
   await doctor.save();
+ 
+
   return token;
 };
+
 
 doctorSchema.methods.toJSON= function(){
   const doctor=this;
