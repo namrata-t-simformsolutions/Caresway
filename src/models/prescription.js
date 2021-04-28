@@ -8,6 +8,16 @@ const prescriptionSchema = new mongoose.Schema(
       required: true,
       ref: "Appointment",
     },
+    appointmentDate: {
+      type: Date,
+      required: true,
+      ref: "Appointment",
+    },
+    appointTime:{
+      type: String,
+      required: true,
+      ref: "Appointment",
+    },
     tabletName: {
       type: String,
     },

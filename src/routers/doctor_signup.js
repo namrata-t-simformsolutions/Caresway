@@ -18,10 +18,10 @@ router.post('/doctor/signup', async (req,res) =>{
         // sendMail(doctorSignup.email,doctorSignup.name);
         res.status(201).send('success!!')
    } 
-    catch(e){
+    catch(error){
         
-        console.log(e)
-        res.status(500).send(e)
+        console.log(error)
+        res.status(500).send(error)
     }
 })
 
