@@ -5,6 +5,7 @@ const Clinic = require("../models/clinic");
 const SignUp = require("../models/signup");
 const auth = require("../middlewares/doctorAuth");
 const Signup = require("../models/signup");
+const { concat } = require("async");
 
 router.get("/doctors", async (req, res) => {
   const city = req.query.city;
@@ -102,6 +103,33 @@ router.get("/doctor/clinics", auth, async (req, res) => {
     //console.log(doctor.clinic)
     res.send(doctor.clinic);
   }
+});
+
+router.get("/clinics", async (req, res) => {
+  const clinics = await Clinic.find({ });
+  if(clinics.length!=0){
+    const result =await Promise.all(clinics.map(async (val)=>{
+      const doctor = await Doctor.find({_id:val.owner});
+       const user = await Signup.find({ email: doctor[0].email });
+        console.log(val.clinic_address)
+       const temp = {
+         "Doctor_Id": doctor[0].id,
+         "Doctor_name": user[0].name,
+         "Doctor_Email": doctor[0].email,
+        "Clinic_name": val.clinic_name,
+        "Clinic_address": val.clinic_address,
+        "Clinic_timing": val.clinic_timing
+            }
+            return temp;
+    }
+    )
+    )
+  res.send(result)
+  }
+  else{
+    res.status(400).send(e)
+  }
+
 });
 
 module.exports = router;
