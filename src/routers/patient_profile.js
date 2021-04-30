@@ -15,7 +15,7 @@ router.get("/patient/profile", patientAuth, async (req,res) =>{
             "patient_allergies":patient.allergies,
             "patient_other_illness":patient.other_illness,
             "patient_operations_surgeries":patient.operations_surgeries,
-            "patient_family_history":patient.patient_family_history,
+            "patient_family_history":patient.family_history,
             "patient_contact_number": patient.contact_number,
             "patient_dob": patient.dob,
             "patient_height": patient.height,
@@ -24,6 +24,7 @@ router.get("/patient/profile", patientAuth, async (req,res) =>{
             "patient_address": patient.address,
             "patient_blood_group": patient.blood_group
         }
+        // console.log(temp);
         res.send(temp)
     }
     catch(e){

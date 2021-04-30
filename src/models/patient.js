@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
-const Appointment = require('../models/appointment');
+const Appointment = require("../models/appointment");
 
 const patientSchema = new mongoose.Schema(
   {
@@ -21,33 +21,33 @@ const patientSchema = new mongoose.Schema(
       type: Number,
       unique: true,
       trim: true,
-      validate(value) {
-        if (!validator.isInt(value)) {
-          throw new Error("invalid phone number");
-        }
-      },
+      // validate(value) {
+      //   if (!validator.isInt(value)) {
+      //     throw new Error("invalid phone number");
+      //   }
+      // },
     },
     dob: {
       type: Date,
       trim: true,
     },
     height: {
-      type: Number,
+      type:Number,
       trim: true,
-      validate(value) {
-        if (!validator.isInt(value)) {
-          throw new Error("invalid height");
-        }
-      },
+      // validate(value) {
+      //   if (!validator.isInt(value)) {
+      //     throw new Error("invalid height");
+      //   }
+      // },
     },
     weight: {
       type: Number,
       trim: true,
-      validate(value) {
-        if (!validator.isInt(value)) {
-          throw new Error("invalid weight");
-        }
-      },
+      // validate(value) {
+      //   if (!validator.isInt(value)) {
+      //     throw new Error("invalid weight");
+      //   }
+      // },
     },
     gender: {
       type: String,
@@ -78,19 +78,15 @@ const patientSchema = new mongoose.Schema(
         illness_name: {
           type: String,
         },
-        medication: [
-          {
-            name: {
-              type: String,
-            },
-            doses: {
-              type: String,
-            },
-            prescribedBy: {
-              type: String,
-            },
-          },
-        ],
+        medication_name: {
+          type: String,
+        },
+        medication_doses: {
+          type: String,
+        },
+        medication_prescribedBy: {
+          type: String,
+        },
       },
     ],
     unhealthy_habits: {
@@ -109,27 +105,27 @@ const patientSchema = new mongoose.Schema(
         },
       },
     ],
-    family_history:[
+    family_history: [
       {
-        relation:{
-          type:String,
+        relation: {
+          type: String,
         },
-        illness:{
-          type:String
-        }
-      }
-    ]
+        illness: {
+          type: String,
+        },
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-patientSchema.virtual('appointments',{
-  ref:'Appointment',
-  localField: '_id',
-  foreignField:'patientId'
-})
+patientSchema.virtual("appointments", {
+  ref: "Appointment",
+  localField: "_id",
+  foreignField: "patientId",
+});
 
 // patientSchema.virtual('prescriptions',{
 //   ref:'Prescription',
@@ -137,16 +133,16 @@ patientSchema.virtual('appointments',{
 //   foreignField:'patientId'
 // })
 
-patientSchema.methods.toJSON= function(){
-  const patient=this;
-  const patientObject=patient.toObject();
+patientSchema.methods.toJSON = function () {
+  const patient = this;
+  const patientObject = patient.toObject();
 
   delete patientObject.tokens;
   delete patientObject.password;
   delete patientObject.createdAt;
   delete patientObject.updatedAt;
   return patientObject;
-}
+};
 
 patientSchema.methods.getPatientAuthToken = async function () {
   const patient = this;

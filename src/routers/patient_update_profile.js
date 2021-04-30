@@ -34,7 +34,7 @@ router.patch("/patient/profile", patientAuth, async (req, res) => {
     updates.forEach((update) => {
       if (update == "other_illness") {
         const tempUpdate = getNestedObject(req.body, ["other_illness"]);
-        const otherIllnessUpdates = ["illness_name", "medication"];
+        const otherIllnessUpdates = ["illness_name", "medication_name","medication_doses","medication_prescribedBy"];
         const isvalidOtherIllnessUpdates = Object.keys(
           tempUpdate
         ).every((val) => otherIllnessUpdates.includes(val));
@@ -87,6 +87,7 @@ router.patch("/patient/profile", patientAuth, async (req, res) => {
     await req.patient.save();
     res.status(201).send(req.patient);
   } catch (e) {
+    console.log(e);
     res.status(400).send(e);
   }
 });
