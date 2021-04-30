@@ -85,19 +85,24 @@ router.get("/patient/appointments", patientAuth, async (req, res) => {
             
           // })
           const temp={
-            "doctor name":user[0].name,
+            "doctor_name":user[0].name,
             "specialist":doctor.doctor_speciality,
-            "appointment date":val.date,
-            "appointment time":val.time,
+            "appointment_date":val.date,
+            "appointment_time":val.time,
+            "appointment_Id":val._id,
+            "completed":val.completed,
             ...pres
           }
           return temp;
         }else{
           const temp={
-            "doctor name":user[0].name,
+            "doctor_name":user[0].name,
             "specialist":doctor.doctor_speciality,
-            "appointment date":val.date,
-            "appointment time":val.time,
+            "appointment_date":val.date,
+            "appointment_time":val.time,
+            "appointment_Id":val._id,
+            "completed":val.completed,
+
           }
           return temp;
         }
