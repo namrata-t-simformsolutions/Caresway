@@ -20,7 +20,7 @@ router.post("/login", async (req, res) => {
           "isDoc":user.isDoc,
           "name":user.name,
           "email":doctor[0].email,
-          "id":doctor[0]._id,
+          "id":doctor[0]._id, 
           token
         }
         res.send(temp);
