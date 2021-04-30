@@ -20,6 +20,7 @@ const patientUpdateProfile=require('./routers/patient_update_profile');
 const patientAppointment=require('./routers/patient_appointments');
 const patientBookAppointment=require('./routers/patient_book_appointment');
 const patientPrescription = require('./routers/patient_prescription');
+const patientProfile = require('./routers/patient_profile');
 
 const test=require('./routers/test');
 
@@ -53,6 +54,7 @@ app.use(patientBookAppointment);
 app.use(patientAppointment);
 app.use(patientLogout);
 app.use(patientPrescription);
+app.use(patientProfile);
 
 
 app.listen(port,()=>{

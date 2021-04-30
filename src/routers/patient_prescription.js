@@ -10,7 +10,6 @@ const Doctor = require("../models/doctor");
 router.get("/patient/:appointment_Id/prescription", patientAuth, async (req,res) => {
     const patientId = req.patient._id;
     const appointmentId = req.params.appointment_Id
-    console.log(appointmentId)
     try{
         if(!appointmentId){
             console.log('no appointment')
@@ -29,7 +28,7 @@ router.get("/patient/:appointment_Id/prescription", patientAuth, async (req,res)
                     "appointment_time":appointment.time,
                     ...pres
                 }
-                console.log(temp)
+               
                 res.send(temp)
         }
     }
