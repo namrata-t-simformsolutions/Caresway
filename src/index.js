@@ -13,6 +13,7 @@ const doctor = require('./routers/doctors')
 const doctorUpdateProfile=require('./routers/doctor_update_profile');
 const updateClinic=require('./routers/update_clinic');
 const doctorDetial=require('./routers/doctor_detail');
+const doctorProfile = require('./routers/doctor_profile');
 
 const patientSignUp=require('./routers/patient_signup');
 const patientLogout=require('./routers/patient_logout');
@@ -45,6 +46,7 @@ app.use(doctorAppointment);
 app.use(doctorAddPrescription);
 app.use(updateClinic)
 app.use(doctorDetial);
+app.use(doctorProfile);
 
 app.use(loginRoute);
 app.use(patientSignUp);
