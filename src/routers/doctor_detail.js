@@ -11,7 +11,6 @@ router.get("/doctor/:id", async (req, res) => {
     return res.status(400).send("no doctor founds");
   } else {
     const user = await Signup.find({ email: doctor.email });
-    // console.log(user);
     const temp={
         "doctor_name":user[0].name,
         "doctor_email":doctor.email,

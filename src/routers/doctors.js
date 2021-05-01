@@ -22,7 +22,6 @@ router.get("/doctors", async (req, res) => {
                 //doctor_speciality: speciality,
               }
             );
-             //console.log(doctor[0].doctor_speciality);
             if(doctor[0].doctor_speciality===speciality){
               const user = await Signup.find({ email: doctor[0].email });
             const temp = {
@@ -100,7 +99,6 @@ router.get("/doctor/clinics", auth, async (req, res) => {
     return res.stastus(404).send();
   } else {
     await doctor.populate("clinic").execPopulate();
-    //console.log(doctor.clinic)
     res.send(doctor.clinic);
   }
 });
@@ -111,7 +109,6 @@ router.get("/clinics", async (req, res) => {
     const result =await Promise.all(clinics.map(async (val)=>{
       const doctor = await Doctor.find({_id:val.owner});
        const user = await Signup.find({ email: doctor[0].email });
-        console.log(val.clinic_address)
        const temp = {
          "Doctor_Id": doctor[0].id,
          "Doctor_name": user[0].name,

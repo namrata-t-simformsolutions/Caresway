@@ -22,13 +22,13 @@ router.get("/doctor/appointments", doctorAuth, async (req, res) => {
     const result = await Promise.all(
       appointment.map(async (val) => {
         const patient = await Patient.find({ _id: val.patientId });
-        // console.log(val);
+ 
         const user = await SignUp.find({ email: patient[0].email });
         const prescription = await Prescription.find({
           appointmentId: val._id,
         });
         if (prescription) {
-          //console.log(prescription)
+
           const appoin = {
             appointmentId: val._id,
             patient_name: user[0].name,
@@ -62,7 +62,7 @@ router.get("/doctor/appointments", doctorAuth, async (req, res) => {
 router.get("/doctor/appointments/:id", doctorAuth, async (req, res) => {
   const appointmentId = req.params.id;
   const appointment = await Appointment.findById(appointmentId);
-  console.log(appointment);
+  //console.log(appointment);
 
   const patient = await Patient.find({ _id: appointment.patientId });
   // console.log(val);
@@ -97,7 +97,7 @@ router.patch("/doctor/appointments/:id", doctorAuth, async (req, res) => {
   const flag = req.body.completed;
   const date = req.body.date;
   const time = req.body.time;
-  console.log(appointmentId);
+  //console.log(appointmentId);
   if (flag)
     try {
       await Appointment.findByIdAndUpdate(appointmentId, { completed: flag });

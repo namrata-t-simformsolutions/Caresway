@@ -24,7 +24,6 @@ router.get("/patient/profile", patientAuth, async (req,res) =>{
             "patient_address": patient.address,
             "patient_blood_group": patient.blood_group
         }
-        // console.log(temp);
         res.send(temp)
     }
     catch(e){

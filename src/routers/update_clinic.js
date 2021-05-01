@@ -41,24 +41,14 @@ router.patch("/doctor/clinic/:id/:clinicAddressId", doctorAuth, async (req, res)
               .send({ error: "Invalid address updates" });
           }
           const clinic_address = await Clinic.clinic_address.findById(clinic_address_id)
-          console.log(clinic_address)
           Object.keys(tempUpdate).map((value) => {
-            console.log(tempUpdate)
-            console.log(typeof value)
-            console.log(clinic.clinic_address[0].value)
             clinic.clinic_address[value]=req.body.clinic_address[value]
           })
-          //clinic.clinic_address=req.body.clinic_address
-          // req.clinic.clinic_address = req.clinic.clinic_address.concat(
-          //   req.body[update],   
-          // )
-          //console.log(clinic.clinic_address) 
         }
         else {
             clinic[update] = req.body[update];
           }
         });
-        //console.log(clinic)
         await clinic.save();
        res.status(201).send(clinic);
     }
