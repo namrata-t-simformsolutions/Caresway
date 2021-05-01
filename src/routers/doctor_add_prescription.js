@@ -1,8 +1,8 @@
-const Router = require("express").Router();
+const router = require("express").Router();
 const Prescription = require("../models/prescription");
 const doctorAuth = require("../middlewares/doctorAuth");
 
-Router.post("/doctor/:id/add_prescription", doctorAuth, async (req, res) => {
+router.post("/doctor/:id/add_prescription", doctorAuth, async (req, res) => {
   
     const pres = new Prescription({
       appointmentId: req.params.id,
@@ -17,4 +17,4 @@ Router.post("/doctor/:id/add_prescription", doctorAuth, async (req, res) => {
   // }
 });
 
-module.exports=Router;
+module.exports=router;

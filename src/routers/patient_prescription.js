@@ -26,7 +26,10 @@ router.get("/patient/:appointment_Id/prescription", patientAuth, async (req,res)
                     "specialist":doctor.doctor_speciality,
                     "appointment_date":appointment.date,
                     "appointment_time":appointment.time,
-                    ...pres
+                    "tablet_name":pres[0].tabletName,
+                    "dose":pres[0].dose,
+                    "Quantity":pres[0].Quantity,
+                    "numberOfDays":pres[0].numberOfDays
                 }
                
                 res.send(temp)
