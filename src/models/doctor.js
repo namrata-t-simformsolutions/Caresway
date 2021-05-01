@@ -18,13 +18,13 @@ const doctorSchema = new mongoose.Schema({
   },
   contact_no: {
     type: Number,
-    validate(value) {
-      if (value) {
-        if (value.len() != 10) {
-          throw new Error("Number must be 10 digit");
-        }
-      }
-    },
+    // validate(value) {
+    //   if (value) {
+    //     if (value.len() != 10) {
+    //       throw new Error("Number must be 10 digit");
+    //     }
+    //   }
+    // },
   },
   doctor_speciality: {
     type: String,

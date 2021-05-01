@@ -11,6 +11,7 @@ router.get("/Myprofile", doctorAuth, async (req,res) =>{
         const user = await Signup.find({email: doctor.email})
         
         const temp = {
+            "doctor_id":doctorId,
             "doctor_name": user[0].name,
             "doctor_email": doctor.email,
             "doctor_contact_no": doctor.contact_no,
