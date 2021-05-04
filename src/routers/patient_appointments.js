@@ -53,4 +53,24 @@ router.get("/patient/appointments", patientAuth, async (req, res) => {
   }
 });
 
+router.patch("/patient/appointments/:id", patientAuth, async (req, res) => {
+  const appointmentId = req.params.id;
+  const date = req.body.date;
+  const time = req.body.time;
+
+ if (date || time) {
+    try {
+      if(date){
+        await Appointment.findByIdAndUpdate(appointmentId, { date });
+      }
+      if(time){
+        await Appointment.findByIdAndUpdate(appointmentId, { time });
+      }
+      res.send("success");
+    } catch (e) {
+      res.status(400).send("failed");
+    }
+  }
+});
+
 module.exports = router;

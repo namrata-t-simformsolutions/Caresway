@@ -95,8 +95,6 @@ router.get("/doctor/appointments/:id", doctorAuth, async (req, res) => {
 router.patch("/doctor/appointments/:id", doctorAuth, async (req, res) => {
   const appointmentId = req.params.id;
   const flag = req.body.completed;
-  const date = req.body.date;
-  const time = req.body.time;
   //console.log(appointmentId);
   if (flag)
     try {
@@ -105,19 +103,7 @@ router.patch("/doctor/appointments/:id", doctorAuth, async (req, res) => {
     } catch (e) {
       res.status(400).send("failed");
     }
-  else if (date || time) {
-    try {
-      if(date){
-        await Appointment.findByIdAndUpdate(appointmentId, { date });
-      }
-      if(time){
-        await Appointment.findByIdAndUpdate(appointmentId, { time });
-      }
-      res.send("success");
-    } catch (e) {
-      res.status(400).send("failed");
-    }
-  }
+ 
 });
 
 router.delete("/doctor/appointments/:id", doctorAuth, async (req, res) => {

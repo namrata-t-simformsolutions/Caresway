@@ -6,6 +6,7 @@ const Patient = require("../models/patient");
 
 router.post("/login", async (req, res) => {
   try {
+    console.log(req.body.email)
     const user = await Signup.findByCredentails(
       req.body.email,
       req.body.password
